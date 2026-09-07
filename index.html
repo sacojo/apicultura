@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Melífera | Biofísica, Fenología y Práctica de la Colmena (Apis mellifera)</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Fraunces & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Configuración de Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            honey: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              200: '#fde68a',
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+              800: '#92400e',
+              900: '#78350f',
+              950: '#451a03',
+            },
+            botanic: {
+              800: '#1b2d21',
+              900: '#122017',
+              950: '#0a130e',
+            }
+          },
+          fontFamily: {
+            serif: ['"Fraunces"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Capa Visual Complementaria -->
+  <link rel="stylesheet" href="css/custom.css">
+
+  <!-- Capas de Datos y Lógica (Desacopladas con Defer) -->
+  <script src="js/data.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body class="bg-[#FAF8F3] text-stone-800 font-sans antialiased honeycomb-pattern selection:bg-honey-200 selection:text-honey-950">
+
+  <!-- Barra de progreso de lectura superior -->
+  <div id="reading-progress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-honey-400 via-amber-500 to-honey-600 z-50 transition-all duration-150 w-0"></div>
+
+  <!-- Barra de Navegación Accesible -->
+  <nav class="sticky top-0 z-40 w-full glass-nav" aria-label="Navegación principal">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group" aria-label="Inicio Melífera">
+        <span class="w-10 h-10 rounded-xl bg-honey-400 text-honey-950 flex items-center justify-center shadow-sm shadow-honey-500/30 group-hover:scale-105 transition-transform duration-300">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/>
+            <path d="M12 11l8-4.5"/>
+            <path d="M12 11v9"/>
+            <path d="M12 11L4 6.5"/>
+          </svg>
+        </span>
+        <div class="leading-none">
+          <span class="font-serif text-2xl font-bold tracking-tight text-stone-900 block">Melífera</span>
+          <span class="text-[10px] tracking-widest uppercase font-semibold text-honey-700">Biofísica & Apiario</span>
+        </div>
+      </a>
+
+      <!-- Anclajes de Navegación (Delegación Semántica data-action) -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-700">
+        <a href="#anatomia" data-action="scroll" data-target="#anatomia" class="hover:text-honey-700 transition-colors">La Colmena</a>
+        <a href="#bento" data-action="scroll" data-target="#bento" class="hover:text-honey-700 transition-colors">Fundamentos</a>
+        <a href="#calendario" data-action="scroll" data-target="#calendario" class="hover:text-honey-700 transition-colors">Ciclo Anual</a>
+        <a href="#productos" data-action="scroll" data-target="#productos" class="hover:text-honey-700 transition-colors">Botica</a>
+        <a href="#calculadora" data-action="scroll" data-target="#calculadora" class="hover:text-honey-700 transition-colors">Estimador</a>
+        <a href="#faq" data-action="scroll" data-target="#faq" class="hover:text-honey-700 transition-colors">Consultas</a>
+      </div>
+
+      <!-- CTA de Navegación -->
+      <div class="flex items-center gap-3">
+        <button type="button" data-action="scroll" data-target="#calculadora" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-900 text-honey-100 text-xs font-semibold tracking-wide uppercase hover:bg-honey-700 hover:text-white transition-all shadow-sm">
+          <span>Simulador</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Módulo A: Hero Institucional y Telemetría Biológica -->
+  <header class="relative pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden border-b border-stone-200/60">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-honey-100/90 border border-honey-300/80 text-honey-900 text-xs font-semibold tracking-wide uppercase">
+            <span class="w-2 h-2 rounded-full bg-honey-600 animate-bio-pulse"></span>
+            Biología, Custodia y Sostenibilidad
+          </div>
+
+          <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-stone-950 leading-[1.08]">
+            El arte milenario de escuchar <span class="italic font-normal text-honey-600 underline decoration-honey-300 decoration-wavy underline-offset-8">a las abejas</span>.
+          </h1>
+
+          <p class="text-stone-600 text-lg md:text-xl font-normal leading-relaxed max-w-2xl">
+            La apicultura no consiste solo en recolectar miel; es una práctica de preservación ecosistémica y comprensión de las leyes termodinámicas y mecánicas de <em>Apis mellifera</em>.
+          </p>
+
+          <!-- Botones de Acción Hero con Delegación Semántica -->
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <button type="button" data-action="scroll" data-target="#bento" class="px-7 py-3.5 rounded-2xl bg-honey-500 text-stone-950 font-bold hover:bg-honey-400 transition-all shadow-lg shadow-honey-500/20 text-sm">
+              Explorar Fundamentos
+            </button>
+            <button type="button" data-action="scroll" data-target="#calculadora" class="px-7 py-3.5 rounded-2xl bg-white border border-stone-300/90 text-stone-800 font-semibold hover:border-stone-400 hover:bg-stone-50 transition-all text-sm">
+              Estimador Técnico
+            </button>
+          </div>
+
+          <!-- Tres Métricas de Impacto Zootécnico y Biológico -->
+          <div class="pt-8 border-t border-stone-200/80 grid grid-cols-3 gap-6">
+            <div>
+              <div class="font-serif text-3xl md:text-4xl font-bold text-stone-900">84%</div>
+              <div class="text-xs text-stone-500 uppercase tracking-wider font-semibold mt-1">Especies cultivadas polinizadas</div>
+            </div>
+            <div>
+              <div class="font-serif text-3xl md:text-4xl font-bold text-stone-900">60.000</div>
+              <div class="text-xs text-stone-500 uppercase tracking-wider font-semibold mt-1">Individuos por colmena (pico)</div>
+            </div>
+            <div>
+              <div class="font-serif text-3xl md:text-4xl font-bold text-stone-900">200+</div>
+              <div class="text-xs text-stone-500 uppercase tracking-wider font-semibold mt-1">Aleteos por segundo (Hz)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo Visual Destacado -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-md lg:max-w-none">
+            <div class="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-honey-200 to-amber-300 opacity-60 blur-xl"></div>
+            
+            <div class="relative bg-white p-4 rounded-3xl shadow-2xl border border-stone-200/80">
+              <img 
+                src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1000&q=80" 
+                alt="Cuadro de panal con celdillas hexagonales y abejas Apis mellifera" 
+                class="w-full h-80 sm:h-96 object-cover rounded-2xl"
+                loading="eager"
+              >
+              <div class="p-4 mt-2 flex items-center justify-between">
+                <div>
+                  <h2 class="font-serif font-bold text-stone-900 text-lg">Apis mellifera</h2>
+                  <p class="text-xs text-stone-500">Teselación prismática con celdillas de 120°</p>
+                </div>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-honey-100 text-honey-800">
+                  Cera virgen
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Módulo B: Bento Grid de Fundamentos Biofísicos -->
+  <section id="bento" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-honey-700 font-bold uppercase tracking-wider text-xs">Fundamentos Biofísicos</span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-stone-950 mt-2">
+        La biomecánica y termodinámica del superorganismo
+      </h2>
+      <p class="text-stone-600 text-sm sm:text-base mt-3">
+        La colmena opera como un sistema físico autorregulado sin mando central: vectores polares, equilibrio térmico y mínima disipación de energía de cera.
+      </p>
+    </div>
+
+    <!-- Contenedor Modular Dinámico del Bento Grid (Inyectado desde js/app.js) -->
+    <div id="bento-grid-container" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </section>
+
+  <!-- Sección Anatomía y Estructura Social -->
+  <section id="anatomia" class="py-16 bg-stone-100/70 border-y border-stone-200/80">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+        <div>
+          <span class="text-honey-700 font-bold uppercase tracking-wider text-xs">Estructura Social</span>
+          <h2 class="font-serif text-3xl font-semibold text-stone-950 mt-1">Los Tres Roles de la Colonia</h2>
+          <p class="text-stone-600 text-sm mt-2 max-w-xl">
+            Reina, obreras y zánganos: programación morfológica, etología y diferenciación funcional en el superorganismo.
+          </p>
+        </div>
+      </div>
+      <div id="caste-card" class="bg-white rounded-3xl p-8 border border-stone-200/90 shadow-sm text-center py-10 text-stone-600 text-sm">
+        <p class="font-semibold text-stone-900 mb-1">Polietismo etario y cohesión feromonal</p>
+        <p class="text-xs text-stone-500 max-w-lg mx-auto">La división de tareas se regula por la edad cronológica de la obrera y la concentración de feromona mandibular de la reina (sustancia real), sincronizando la colonia de hasta 60.000 individuos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Módulo C: Matriz Fenológica Estacional (4 Estaciones) -->
+  <section id="calendario" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-honey-700 font-bold uppercase tracking-wider text-xs">Cronograma Fenológico</span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-stone-950 mt-2">
+        Las Cuatro Estaciones del Apiario
+      </h2>
+      <p class="text-stone-600 text-sm sm:text-base mt-3">
+        La práctica apícola sostenible sincroniza las intervenciones mecánicas del apicultor con el ciclo reproductivo de la reina, la floración y el clima.
+      </p>
+    </div>
+
+    <!-- Contenedor Modular Dinámico de Fenología (Inyectado desde js/app.js) -->
+    <div id="calendario-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+  </section>
+
+  <!-- Módulo D: Botica Natural y Derivados de la Colmena -->
+  <section id="productos" class="py-24 bg-stone-900 text-stone-100 border-b border-stone-800">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-honey-400 font-bold uppercase tracking-wider text-xs">Botica Natural</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-white mt-2">
+          Bioquímica y Derivados de la Colmena
+        </h2>
+        <p class="text-stone-400 text-sm sm:text-base mt-3">
+          Más allá de la miel: compuestos bioactivos, defensas microbiológicas y biopolímeros sintetizados por el superorganismo.
+        </p>
+      </div>
+
+      <!-- Contenedor Modular Dinámico de Productos (Inyectado desde js/app.js) -->
+      <div id="productos-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- Módulo E: Simulador Reactivo de Cosecha & Polinización -->
+  <section id="calculadora" class="py-24 max-w-4xl mx-auto px-6">
+    <div class="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 shadow-xl relative overflow-hidden">
+      
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-10 h-10 rounded-xl bg-honey-100 text-honey-700 flex items-center justify-center font-bold text-lg">
+          🧮
+        </span>
+        <div>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-950">Calculadora de Cosecha & Polinización</h2>
+          <p class="text-xs text-stone-500 mt-0.5">Modelo predictivo zootécnico bajo manejo ético y sostenible</p>
+        </div>
+      </div>
+
+      <form class="space-y-8 mt-8">
+        
+        <!-- Control deslizante colmenas -->
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <label for="num-colmenas" class="text-sm font-semibold text-stone-800">Número de Colmenas Activas:</label>
+            <span id="colmenas-val" class="font-serif font-bold text-xl text-honey-700 bg-honey-50 px-3.5 py-1 rounded-xl border border-honey-200">5 colmenas</span>
+          </div>
+          <input 
+            type="range" 
+            id="num-colmenas" 
+            min="1" 
+            max="60" 
+            value="5" 
+            class="w-full accent-honey-500 cursor-pointer h-2 bg-stone-200 rounded-lg"
+          >
+          <div class="flex justify-between text-[11px] text-stone-400 mt-1 font-medium">
+            <span>1 (Iniciación / Autoconsumo)</span>
+            <span>25 (Semi-profesional)</span>
+            <span>60+ (Apiario Comercial)</span>
+          </div>
+        </div>
+
+        <!-- Selector de floración con radio buttons -->
+        <div>
+          <span class="text-sm font-semibold text-stone-800 block mb-2">Entorno Floral & Disponibilidad de Pasto Apícola:</span>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label class="cursor-pointer">
+              <input type="radio" name="flora" value="alta" checked class="peer sr-only">
+              <div class="p-3.5 rounded-2xl border border-stone-200 peer-checked:border-honey-500 peer-checked:bg-honey-50/70 peer-checked:ring-1 peer-checked:ring-honey-500 transition-all text-center">
+                <span class="block text-xs font-bold text-stone-800">Alta Densidad</span>
+                <span class="text-[10px] text-stone-500 block mt-0.5">Bosques y praderas vírgenes (28 kg/colmena)</span>
+              </div>
+            </label>
+
+            <label class="cursor-pointer">
+              <input type="radio" name="flora" value="media" class="peer sr-only">
+              <div class="p-3.5 rounded-2xl border border-stone-200 peer-checked:border-honey-500 peer-checked:bg-honey-50/70 peer-checked:ring-1 peer-checked:ring-honey-500 transition-all text-center">
+                <span class="block text-xs font-bold text-stone-800">Moderada</span>
+                <span class="text-[10px] text-stone-500 block mt-0.5">Zonas agrícolas mixtas y matorral (18 kg/colmena)</span>
+              </div>
+            </label>
+
+            <label class="cursor-pointer">
+              <input type="radio" name="flora" value="baja" class="peer sr-only">
+              <div class="p-3.5 rounded-2xl border border-stone-200 peer-checked:border-honey-500 peer-checked:bg-honey-50/70 peer-checked:ring-1 peer-checked:ring-honey-500 transition-all text-center">
+                <span class="block text-xs font-bold text-stone-800">Secano / Árida</span>
+                <span class="text-[10px] text-stone-500 block mt-0.5">Ecosistemas secos con sequías periódicas (10 kg/colmena)</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Bloque de Resultados Quirúrgicos -->
+        <div class="pt-6 border-t border-stone-200/80 bg-stone-50 rounded-2xl p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+          <div>
+            <span class="text-xs text-stone-500 font-semibold uppercase tracking-wider">Miel Extraíble Anual</span>
+            <div id="res-miel" class="font-serif text-3xl font-bold text-honey-700 mt-1">140 kg</div>
+            <span class="text-[10px] text-stone-500">Excluyendo reserva invernal intocable</span>
+          </div>
+
+          <div>
+            <span class="text-xs text-stone-500 font-semibold uppercase tracking-wider">Frascos Comerciales</span>
+            <div id="res-frascos" class="font-serif text-3xl font-bold text-stone-900 mt-1">280 ud.</div>
+            <span class="text-[10px] text-stone-500">En envases homologados de 500 g</span>
+          </div>
+
+          <div>
+            <span class="text-xs text-stone-500 font-semibold uppercase tracking-wider">Radio de Polinización</span>
+            <div id="res-flores" class="font-serif text-3xl font-bold text-emerald-700 mt-1">~3.5 km²</div>
+            <span class="text-[10px] text-stone-500">Impacto ecológico en biodiversidad</span>
+          </div>
+        </div>
+
+        <!-- Nota Zootécnica Ética -->
+        <p class="text-center text-[11px] text-stone-500 italic leading-relaxed">
+          *Principio zootécnico fundamental: La apicultura regenerativa jamás despoja el 100% de la miel de la colmena. Cada colonia requiere retener obligatoriamente entre 15 y 20 kg de reservas de miel sellada en su cámara de cría para sostener la termorregulación del racimo invernal (34.5 °C) sin riesgo de inanición ni dependencia de sucedáneos artificiales.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Módulo F: Acordeón Técnico de Preguntas Frecuentes (FAQ) -->
+  <section id="faq" class="py-20 max-w-3xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <span class="text-honey-700 font-bold uppercase tracking-wider text-xs">Resolución Técnica</span>
+      <h2 class="font-serif text-3xl font-semibold text-stone-950 mt-1">
+        Consultas Frecuentes y Respuestas Biológicas
+      </h2>
+      <p class="text-stone-600 text-sm mt-2">
+        Fundamentos científicos frente a dudas operativas y mitos habituales del colmenar.
+      </p>
+    </div>
+
+    <!-- Acordeón Accesible con Delegación Única -->
+    <div class="space-y-4">
+      
+      <!-- FAQ 1 -->
+      <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+        <button 
+          type="button" 
+          data-action="toggle-faq" 
+          data-target="1" 
+          aria-expanded="false" 
+          aria-controls="faq-content-1" 
+          class="w-full px-6 py-4 text-left font-bold text-sm text-stone-900 flex justify-between items-center hover:bg-stone-50 transition-colors"
+        >
+          <span>¿Por qué la miel auténtica se solidifica o cristaliza de forma espontánea?</span>
+          <span id="faq-icon-1" class="text-honey-600 font-serif text-xl font-bold select-none ml-3">+</span>
+        </button>
+        <div id="faq-content-1" class="hidden px-6 pb-5 pt-1 text-xs text-stone-600 leading-relaxed border-t border-stone-100">
+          La cristalización es un fenómeno físico natural e inexorable producto de la sobresaturación de azúcares (proporción glucosa/fructosa superior a 1.2). La glucosa, de menor solubilidad, precipita formando microcristales alrededor de partículas naturales de polen. Este proceso certifica categóricamente que la miel es cruda y pura: no ha sufrido pasteurización ni sobrecalentamiento térmico industrial (>40 °C), conservando intactas sus enzimas termolábiles (invertasa y glucosa oxidasa) y sus propiedades antimicrobianas.
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+        <button 
+          type="button" 
+          data-action="toggle-faq" 
+          data-target="2" 
+          aria-expanded="false" 
+          aria-controls="faq-content-2" 
+          class="w-full px-6 py-4 text-left font-bold text-sm text-stone-900 flex justify-between items-center hover:bg-stone-50 transition-colors"
+        >
+          <span>¿Por qué es letal para la colonia extraer la totalidad de la miel en otoño?</span>
+          <span id="faq-icon-2" class="text-honey-600 font-serif text-xl font-bold select-none ml-3">+</span>
+        </button>
+        <div id="faq-content-2" class="hidden px-6 pb-5 pt-1 text-xs text-stone-600 leading-relaxed border-t border-stone-100">
+          Las abejas no hibernan en estado de letargo o dormancia: forman un racimo térmico compacto donde decenas de miles de obreras consumen miel continuamente para generar fricción muscular torácica y mantener la cámara de cría a 34.5 °C contra temperaturas bajo cero. Una colonia típica consume entre 15 y 20 kg de miel operculada durante el periodo frío. Despojarla de dicha reserva la condena a la muerte por inanición o a sobrevivir con jarabes de azúcar deficitarios en inmunoglobulinas y acidez defensiva.
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+        <button 
+          type="button" 
+          data-action="toggle-faq" 
+          data-target="3" 
+          aria-expanded="false" 
+          aria-controls="faq-content-3" 
+          class="w-full px-6 py-4 text-left font-bold text-sm text-stone-900 flex justify-between items-center hover:bg-stone-50 transition-colors"
+        >
+          <span>¿Por qué el ácaro Varroa destructor exige tratamiento veterinario inmediato post-cosecha?</span>
+          <span id="faq-icon-3" class="text-honey-600 font-serif text-xl font-bold select-none ml-3">+</span>
+        </button>
+        <div id="faq-content-3" class="hidden px-6 pb-5 pt-1 text-xs text-stone-600 leading-relaxed border-t border-stone-100">
+          Varroa destructor se alimenta destructivamente del cuerpo graso de la abeja (órgano equivalente al hígado humano, vital para la síntesis de vitelogenina, detoxificación celular e inmunidad humoral). Al perforar la cutícula, inocula el virus de las alas deformadas (DWV). El tratamiento veterinario reglamentario en otoño es imperativo para que la generación de abejas de invierno nazca sana y protegida, garantizando una longevidad de 4 a 6 meses capaz de alcanzar la primavera.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Pie de página institucional -->
+  <footer class="bg-stone-950 text-stone-400 py-14 border-t border-stone-800">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-honey-500 text-stone-950 flex items-center justify-center font-bold">⬡</span>
+        <span class="font-serif text-lg font-bold text-white tracking-tight">Melífera Digital</span>
+      </div>
+      <p class="text-xs text-stone-500 text-center md:text-left">
+        Arquitectura desacoplada en cuatro capas, rigor biofísico y custodia de <em>Apis mellifera</em>.
+      </p>
+      <div class="text-xs text-stone-500">
+        © <span id="year">2026</span> Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
