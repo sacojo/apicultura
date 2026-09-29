@@ -87,13 +87,27 @@
         <a href="#faq" data-action="scroll" data-target="#faq" class="hover:text-honey-700 transition-colors">Consultas</a>
       </div>
 
-      <!-- CTA de Navegación -->
+      <!-- CTA de Navegación & Botón Hamburguesa Móvil -->
       <div class="flex items-center gap-3">
         <button type="button" data-action="scroll" data-target="#calculadora" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-900 text-honey-100 text-xs font-semibold tracking-wide uppercase hover:bg-honey-700 hover:text-white transition-all shadow-sm">
           <span>Simulador</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </button>
+
+        <button type="button" data-action="toggle-mobile-menu" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú de navegación" class="md:hidden p-2.5 rounded-xl text-stone-700 hover:bg-honey-100/70 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
+    </div>
+
+    <!-- Menú Desplegable Móvil -->
+    <div id="mobile-menu" class="hidden md:hidden bg-stone-50/95 border-b border-stone-200 px-6 py-4 space-y-3 text-sm font-medium text-stone-800 backdrop-blur-md">
+      <a href="#anatomia" data-action="scroll" data-target="#anatomia" class="block py-1 hover:text-honey-700 transition-colors">La Colmena</a>
+      <a href="#bento" data-action="scroll" data-target="#bento" class="block py-1 hover:text-honey-700 transition-colors">Fundamentos</a>
+      <a href="#calendario" data-action="scroll" data-target="#calendario" class="block py-1 hover:text-honey-700 transition-colors">Ciclo Anual</a>
+      <a href="#productos" data-action="scroll" data-target="#productos" class="block py-1 hover:text-honey-700 transition-colors">Botica</a>
+      <a href="#calculadora" data-action="scroll" data-target="#calculadora" class="block py-1 hover:text-honey-700 transition-colors">Estimador</a>
+      <a href="#faq" data-action="scroll" data-target="#faq" class="block py-1 hover:text-honey-700 transition-colors">Consultas</a>
     </div>
   </nav>
 
@@ -200,7 +214,11 @@
           </p>
         </div>
       </div>
-      <div id="caste-card" class="bg-white rounded-3xl p-8 border border-stone-200/90 shadow-sm text-center py-10 text-stone-600 text-sm">
+
+      <!-- Contenedor Modular Dinámico de Castas (Inyectado desde js/app.js) -->
+      <div id="castas-grid-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"></div>
+
+      <div id="caste-card" class="bg-white rounded-3xl p-6 border border-stone-200/90 shadow-sm text-center py-6 text-stone-600 text-sm">
         <p class="font-semibold text-stone-900 mb-1">Polietismo etario y cohesión feromonal</p>
         <p class="text-xs text-stone-500 max-w-lg mx-auto">La división de tareas se regula por la edad cronológica de la obrera y la concentración de feromona mandibular de la reina (sustancia real), sincronizando la colonia de hasta 60.000 individuos.</p>
       </div>
@@ -284,7 +302,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <label class="cursor-pointer">
               <input type="radio" name="flora" value="alta" checked class="peer sr-only">
-              <div class="p-3.5 rounded-2xl border border-stone-200 peer-checked:border-honey-500 peer-checked:bg-honey-50/70 peer-checked:ring-1 peer-checked:ring-honey-500 transition-all text-center">
+              <div class="p-3.5 rounded-2xl border border-stone-200 peer-checked:border-honey-500 peer-checked:bg-honey-50/70 peer-checked:ring-1 peer-checked:ring-honey-500 peer-focus-visible:ring-2 peer-focus-visible:ring-honey-500 transition-all text-center">
                 <span class="block text-xs font-bold text-stone-800">Alta Densidad</span>
                 <span class="text-[10px] text-stone-500 block mt-0.5">Bosques y praderas vírgenes (28 kg/colmena)</span>
               </div>
@@ -292,7 +310,7 @@
 
             <label class="cursor-pointer">
               <input type="radio" name="flora" value="media" class="peer sr-only">
-              <div class="p-3.5 rounded-2xl border border-stone-200 peer-checked:border-honey-500 peer-checked:bg-honey-50/70 peer-checked:ring-1 peer-checked:ring-honey-500 transition-all text-center">
+              <div class="p-3.5 rounded-2xl border border-stone-200 peer-checked:border-honey-500 peer-checked:bg-honey-50/70 peer-checked:ring-1 peer-checked:ring-honey-500 peer-focus-visible:ring-2 peer-focus-visible:ring-honey-500 transition-all text-center">
                 <span class="block text-xs font-bold text-stone-800">Moderada</span>
                 <span class="text-[10px] text-stone-500 block mt-0.5">Zonas agrícolas mixtas y matorral (18 kg/colmena)</span>
               </div>
@@ -300,7 +318,7 @@
 
             <label class="cursor-pointer">
               <input type="radio" name="flora" value="baja" class="peer sr-only">
-              <div class="p-3.5 rounded-2xl border border-stone-200 peer-checked:border-honey-500 peer-checked:bg-honey-50/70 peer-checked:ring-1 peer-checked:ring-honey-500 transition-all text-center">
+              <div class="p-3.5 rounded-2xl border border-stone-200 peer-checked:border-honey-500 peer-checked:bg-honey-50/70 peer-checked:ring-1 peer-checked:ring-honey-500 peer-focus-visible:ring-2 peer-focus-visible:ring-honey-500 transition-all text-center">
                 <span class="block text-xs font-bold text-stone-800">Secano / Árida</span>
                 <span class="text-[10px] text-stone-500 block mt-0.5">Ecosistemas secos con sequías periódicas (10 kg/colmena)</span>
               </div>
@@ -349,64 +367,8 @@
       </p>
     </div>
 
-    <!-- Acordeón Accesible con Delegación Única -->
-    <div class="space-y-4">
-      
-      <!-- FAQ 1 -->
-      <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
-        <button 
-          type="button" 
-          data-action="toggle-faq" 
-          data-target="1" 
-          aria-expanded="false" 
-          aria-controls="faq-content-1" 
-          class="w-full px-6 py-4 text-left font-bold text-sm text-stone-900 flex justify-between items-center hover:bg-stone-50 transition-colors"
-        >
-          <span>¿Por qué la miel auténtica se solidifica o cristaliza de forma espontánea?</span>
-          <span id="faq-icon-1" class="text-honey-600 font-serif text-xl font-bold select-none ml-3">+</span>
-        </button>
-        <div id="faq-content-1" class="hidden px-6 pb-5 pt-1 text-xs text-stone-600 leading-relaxed border-t border-stone-100">
-          La cristalización es un fenómeno físico natural e inexorable producto de la sobresaturación de azúcares (proporción glucosa/fructosa superior a 1.2). La glucosa, de menor solubilidad, precipita formando microcristales alrededor de partículas naturales de polen. Este proceso certifica categóricamente que la miel es cruda y pura: no ha sufrido pasteurización ni sobrecalentamiento térmico industrial (>40 °C), conservando intactas sus enzimas termolábiles (invertasa y glucosa oxidasa) y sus propiedades antimicrobianas.
-        </div>
-      </div>
-
-      <!-- FAQ 2 -->
-      <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
-        <button 
-          type="button" 
-          data-action="toggle-faq" 
-          data-target="2" 
-          aria-expanded="false" 
-          aria-controls="faq-content-2" 
-          class="w-full px-6 py-4 text-left font-bold text-sm text-stone-900 flex justify-between items-center hover:bg-stone-50 transition-colors"
-        >
-          <span>¿Por qué es letal para la colonia extraer la totalidad de la miel en otoño?</span>
-          <span id="faq-icon-2" class="text-honey-600 font-serif text-xl font-bold select-none ml-3">+</span>
-        </button>
-        <div id="faq-content-2" class="hidden px-6 pb-5 pt-1 text-xs text-stone-600 leading-relaxed border-t border-stone-100">
-          Las abejas no hibernan en estado de letargo o dormancia: forman un racimo térmico compacto donde decenas de miles de obreras consumen miel continuamente para generar fricción muscular torácica y mantener la cámara de cría a 34.5 °C contra temperaturas bajo cero. Una colonia típica consume entre 15 y 20 kg de miel operculada durante el periodo frío. Despojarla de dicha reserva la condena a la muerte por inanición o a sobrevivir con jarabes de azúcar deficitarios en inmunoglobulinas y acidez defensiva.
-        </div>
-      </div>
-
-      <!-- FAQ 3 -->
-      <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
-        <button 
-          type="button" 
-          data-action="toggle-faq" 
-          data-target="3" 
-          aria-expanded="false" 
-          aria-controls="faq-content-3" 
-          class="w-full px-6 py-4 text-left font-bold text-sm text-stone-900 flex justify-between items-center hover:bg-stone-50 transition-colors"
-        >
-          <span>¿Por qué el ácaro Varroa destructor exige tratamiento veterinario inmediato post-cosecha?</span>
-          <span id="faq-icon-3" class="text-honey-600 font-serif text-xl font-bold select-none ml-3">+</span>
-        </button>
-        <div id="faq-content-3" class="hidden px-6 pb-5 pt-1 text-xs text-stone-600 leading-relaxed border-t border-stone-100">
-          Varroa destructor se alimenta destructivamente del cuerpo graso de la abeja (órgano equivalente al hígado humano, vital para la síntesis de vitelogenina, detoxificación celular e inmunidad humoral). Al perforar la cutícula, inocula el virus de las alas deformadas (DWV). El tratamiento veterinario reglamentario en otoño es imperativo para que la generación de abejas de invierno nazca sana y protegida, garantizando una longevidad de 4 a 6 meses capaz de alcanzar la primavera.
-        </div>
-      </div>
-
-    </div>
+    <!-- Contenedor Modular Dinámico de FAQ Accesible (Inyectado desde js/app.js) -->
+    <div id="faq-accordion-container" class="space-y-4"></div>
   </section>
 
   <!-- Pie de página institucional -->

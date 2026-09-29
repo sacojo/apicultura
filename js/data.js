@@ -191,7 +191,41 @@
     reservaInvernalMaxKg: 20
   };
 
-  // 5. Consultas Técnicas Frecuentes (FAQ - Fase 2)
+  // 5. Castas de la Colonia (Estructura Social)
+  const castasData = [
+    {
+      id: 'reina',
+      nombre: 'La Reina',
+      icono: '👑',
+      poblacion: '1 por colmena',
+      esperanzaVida: '3 a 5 años',
+      morfologia: 'Abdomen alargado y alas cortas relativas; glándulas mandibulares desarrolladas.',
+      funcion: 'Única hembra fértil dedicada a la postura (hasta 2.000 huevos/día en pico) y cohesión química colonial mediante feromona real.',
+      metrica: '2.000 huevos/día | 100% Cohesión'
+    },
+    {
+      id: 'obrera',
+      nombre: 'Las Obreras',
+      icono: '🐝',
+      poblacion: '20.000 - 60.000',
+      esperanzaVida: '4-6 semanas (verano) / 4-6 meses (invierno)',
+      morfologia: 'Patas posteriores adaptadas con corbículas (cestillas de polen), 8 glándulas cereras y aguijón aserrado.',
+      funcion: 'Polietismo etario: nodriza, limpiadora, cerera, guardiana y pecoreadora de néctar, polen, agua y propóleo.',
+      metrica: 'Polietismo dinámico | 1/12 cdta miel/vida'
+    },
+    {
+      id: 'zangano',
+      nombre: 'Los Zánganos',
+      icono: '♂️',
+      poblacion: '200 - 500 (primavera/verano)',
+      esperanzaVida: '2 a 4 meses',
+      morfologia: 'Ojos holópticos de gran tamaño, tórax robusto, carecen de aguijón y de glándulas cereras.',
+      funcion: 'Fecundación de reinas vírgenes en Áreas de Concentración de Zánganos (ACZ) y auxilio en la termorregulación indirecta.',
+      metrica: 'Ojos holópticos 360° | Fecundación nupcial'
+    }
+  ];
+
+  // 6. Consultas Técnicas Frecuentes (FAQ - Fase 2)
   const faqsData = [
     {
       id: 1,
@@ -228,9 +262,12 @@
   Object.freeze(estimadorConfig);
 
   // Exposición global
+  castasData.forEach(item => Object.freeze(item));
+
   window.BENTO_APICOLA_DATA = Object.freeze(bentoData);
   window.CALENDARIO_ESTACIONAL_DATA = calendarioData;
   window.PRODUCTOS_COLMENA_DATA = Object.freeze(productosData);
+  window.CASTAS_COLMENA_DATA = Object.freeze(castasData);
   window.ESTIMADOR_CONFIG = estimadorConfig;
   window.FAQS_APICULTURA_DATA = Object.freeze(faqsData);
 })();

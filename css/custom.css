@@ -103,6 +103,17 @@ html {
   animation: wing-flutter 0.35s ease-in-out infinite;
 }
 
+/* Estilos y transiciones para el menú móvil */
+#mobile-menu {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Indicadores de foco accesible para la navegación con teclado */
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--honey-600);
+  outline-offset: 2px;
+}
+
 /* Transiciones táctiles e interactivas para el Bento Grid y Catálogos */
 .bento-card, .fenologia-card, .producto-card {
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
