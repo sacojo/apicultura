@@ -30,6 +30,23 @@
         break;
       }
 
+      // Conmutación del menú móvil desplegable
+      case 'toggle-mobile-menu': {
+        event.preventDefault();
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu) {
+          const isHidden = mobileMenu.classList.contains('hidden');
+          if (isHidden) {
+            mobileMenu.classList.remove('hidden');
+            actionElement.setAttribute('aria-expanded', 'true');
+          } else {
+            mobileMenu.classList.add('hidden');
+            actionElement.setAttribute('aria-expanded', 'false');
+          }
+        }
+        break;
+      }
+
       // Conmutación accesible del acordeón FAQ
       case 'toggle-faq': {
         event.preventDefault();
@@ -43,10 +60,12 @@
           const isHidden = contentEl.classList.contains('hidden');
           if (isHidden) {
             contentEl.classList.remove('hidden');
+            contentEl.setAttribute('aria-hidden', 'false');
             if (iconEl) iconEl.textContent = '−';
             actionElement.setAttribute('aria-expanded', 'true');
           } else {
             contentEl.classList.add('hidden');
+            contentEl.setAttribute('aria-hidden', 'true');
             if (iconEl) iconEl.textContent = '+';
             actionElement.setAttribute('aria-expanded', 'false');
           }
@@ -246,6 +265,78 @@
   }
 
   // =========================================================================
+  // 4b. Renderizado Modular: Castas de la Colmena (Estructura Social)
+  // =========================================================================
+  function renderCastasColmena() {
+    const container = document.getElementById('castas-grid-container');
+    if (!container || !window.CASTAS_COLMENA_DATA) return;
+
+    const htmlCastas = window.CASTAS_COLMENA_DATA.map((casta) => {
+      return `
+        <article class="bento-card bg-white rounded-3xl p-6 border border-stone-200 shadow-sm flex flex-col justify-between" data-casta="${casta.id}">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-4xl" role="img" aria-label="${casta.nombre}">${casta.icono}</span>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-honey-100 text-honey-800 border border-honey-200">
+                ${casta.poblacion}
+              </span>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-stone-900 mb-1">${casta.nombre}</h3>
+            <span class="text-xs font-semibold text-honey-700 block mb-3">Longevidad: ${casta.esperanzaVida}</span>
+            <div class="space-y-2 text-xs text-stone-600 mb-4">
+              <p><strong class="text-stone-800">Morfología:</strong> ${casta.morfologia}</p>
+              <p><strong class="text-stone-800">Etología y Función:</strong> ${casta.funcion}</p>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-stone-100 flex items-center justify-between text-xs font-medium text-honey-800">
+            <span>${casta.metrica}</span>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    container.innerHTML = htmlCastas;
+  }
+
+  // =========================================================================
+  // 4c. Renderizado Modular: Acordeón FAQ Accesible (Fase 2)
+  // =========================================================================
+  function renderFaqs() {
+    const container = document.getElementById('faq-accordion-container');
+    if (!container || !window.FAQS_APICULTURA_DATA) return;
+
+    const htmlFaqs = window.FAQS_APICULTURA_DATA.map((faq) => {
+      return `
+        <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+          <button
+            type="button"
+            data-action="toggle-faq"
+            data-target="${faq.id}"
+            aria-expanded="false"
+            aria-controls="faq-content-${faq.id}"
+            id="faq-btn-${faq.id}"
+            class="w-full px-6 py-4 text-left font-bold text-sm text-stone-900 flex justify-between items-center hover:bg-stone-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-honey-500 transition-colors"
+          >
+            <span>${faq.pregunta}</span>
+            <span id="faq-icon-${faq.id}" class="text-honey-600 font-serif text-xl font-bold select-none ml-3">+</span>
+          </button>
+          <div
+            id="faq-content-${faq.id}"
+            role="region"
+            aria-labelledby="faq-btn-${faq.id}"
+            aria-hidden="true"
+            class="hidden px-6 pb-5 pt-1 text-xs text-stone-600 leading-relaxed border-t border-stone-100"
+          >
+            ${faq.respuesta}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    container.innerHTML = htmlFaqs;
+  }
+
+  // =========================================================================
   // 5. Simulador Reactivo Quirúrgico de Cosecha & Polinización (Fase 2)
   // =========================================================================
   function actualizarCalculo() {
@@ -367,8 +458,10 @@
 
     // Renderizadores modulares
     renderBentoGrid();
+    renderCastasColmena();
     renderCalendarioEstacional();
     renderProductosColmena();
+    renderFaqs();
 
     // Inicializar eventos reactivos del simulador
     initSimuladorEvents();
